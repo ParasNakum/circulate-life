@@ -37,20 +37,6 @@ export default function Login() {
     }
   };
 
-  const setDemoCredentials = (role) => {
-    if (role === 'admin') {
-      setEmail('admin@gmail.com');
-      setPassword('admin123');
-    } else if (role === 'donor') {
-      setEmail('donor@gmail.com');
-      setPassword('donor123');
-    } else if (role === 'recipient') {
-      setEmail('recipient@gmail.com');
-      setPassword('recipient123');
-    }
-    setError('');
-  };
-
   return (
     <div className="auth-wrapper">
       <div className="auth-card">
@@ -61,22 +47,6 @@ export default function Login() {
           </Link>
           <h2 style={{ fontSize: '1.4rem', color: '#1e293b' }}>Sign in to your account</h2>
           <p style={{ fontSize: '0.88rem', color: '#64748b' }}>Access donor, recipient, or administrator services</p>
-        </div>
-
-        {/* DEMO ACCOUNTS BADGE */}
-        <div className="demo-credentials">
-          <strong style={{ color: '#0f172a' }}>Quick Demo Access (Click to auto-fill):</strong>
-          <div className="demo-btn-group">
-            <button type="button" onClick={() => setDemoCredentials('admin')} className="demo-btn">
-              👑 Admin (admin@gmail.com)
-            </button>
-            <button type="button" onClick={() => setDemoCredentials('donor')} className="demo-btn">
-              🩸 Donor (donor@gmail.com)
-            </button>
-            <button type="button" onClick={() => setDemoCredentials('recipient')} className="demo-btn">
-              🏥 Recipient (recipient@gmail.com)
-            </button>
-          </div>
         </div>
 
         {error && (

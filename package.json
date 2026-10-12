@@ -1,0 +1,25 @@
+{
+  "name": "circulate-life-fullstack",
+  "version": "1.0.0",
+  "description": "Circulate Life - Full-Stack MERN Blood Donation & Management System",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "npm --prefix backend start",
+    "client": "npm --prefix frontend dev",
+    "dev": "node -e \"const { spawn } = require('child_process'); spawn('npm', ['--prefix', 'backend', 'start'], { stdio: 'inherit', shell: true }); spawn('npm', ['--prefix', 'frontend', 'dev'], { stdio: 'inherit', shell: true });\"",
+    "seed": "npm --prefix backend run seed",
+    "build": "npm --prefix frontend run build"
+  },
+  "keywords": [
+    "mern",
+    "blood-bank",
+    "circulate-life",
+    "react",
+    "nodejs",
+    "mongodb",
+    "express"
+  ],
+  "author": "Paras Nakum",
+  "license": "ISC"
+}

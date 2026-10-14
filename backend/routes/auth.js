@@ -8,21 +8,9 @@ const fs = require('fs');
 const User = require('../models/User');
 const { authenticate, JWT_SECRET } = require('../middleware/auth');
 
-// Multer setup for medical document upload
-const uploadDir = path.join(__dirname, '../uploads');
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, uploadDir),
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + path.extname(file.originalname));
-  }
-});
-
-const upload = multer({ storage });
+// Multer setup using memoryStorage (safe for both serverless and persistent servers)
+const storage = multer.memoryStorage();
+const upload = multer({ storage, limits: { fileSize: 5 * 1024 * 1024 } });
 
 // Register Route
 router.post('/register', upload.single('file_upload'), async (req, res) => {
@@ -69,7 +57,7 @@ router.post('/register', upload.single('file_upload'), async (req, res) => {
       address: address || '',
       pincode: pincode || '',
       contact: contact || '',
-      file_upload: req.file ? req.file.filename : ''
+      file_upload: req.file ? req.file.originalname : ''
     });
 
     await newUser.save();
@@ -80,7 +68,11 @@ router.post('/register', upload.single('file_upload'), async (req, res) => {
     });
   } catch (err) {
     console.error('Registration error:', err);
-    res.status(500).json({ message: 'Server error during registration.', error: err.message });
+    res.status(500).json({
+      message: err.message.includes('buffering timed out')
+        ? 'Database connection timed out. Please ensure MONGO_URI is set in Vercel Environment Variables.'
+        : err.message || 'Server error during registration.'
+    });
   }
 });
 

@@ -12,9 +12,11 @@ export default function Home() {
     const fetchStock = async () => {
       try {
         const res = await api.get('/blood/availability');
-        setBloodStock(res.data);
+        if (Array.isArray(res.data)) {
+          setBloodStock(res.data);
+        }
       } catch (err) {
-        console.error('Failed to load blood stock:', err);
+        console.warn('Backend API not yet connected, using standard inventory:', err.message);
       }
     };
     fetchStock();
@@ -78,7 +80,7 @@ export default function Home() {
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))', gap: '1rem' }}>
-            {(bloodStock.length > 0 ? bloodStock : [
+            {(Array.isArray(bloodStock) && bloodStock.length > 0 ? bloodStock : [
               { blood_group: 'A+', unit: 18 },
               { blood_group: 'A-', unit: 9 },
               { blood_group: 'B+', unit: 25 },

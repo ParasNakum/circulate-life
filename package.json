@@ -1,7 +1,7 @@
 {
   "name": "circulate-life-fullstack",
   "version": "1.0.0",
-  "description": "Circulate Life - Full-Stack MERN Blood Donation & Management System",
+  "description": "Circulate Life - Blood Donation & Management System",
   "main": "backend/server.js",
   "scripts": {
     "start": "node backend/server.js",

@@ -45,7 +45,7 @@ app.get('/api/blood/availability', async (req, res) => {
 
 // Health check
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'healthy', project: 'Circulate Life Full-Stack API', timestamp: new Date() });
+  res.json({ status: 'healthy', project: 'Circulate Life - Blood Donation & Management System API', timestamp: new Date() });
 });
 
 // MongoDB Connection & Auto-Seed

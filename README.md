@@ -1,4 +1,4 @@
-# 🩸 Circulate Life - Full-Stack Blood Donation & Management System
+# 🩸 Circulate Life - Blood Donation & Management System
 
 [![React](https://img.shields.io/badge/Frontend-React%2018%20%2B%20Vite-61DAFB?logo=react&logoColor=black)](https://reactjs.org/)
 [![Node.js](https://img.shields.io/badge/Backend-Node.js%20%2B%20Express-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
